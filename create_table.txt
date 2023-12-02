@@ -58,3 +58,4 @@ CREATE TABLE VIEWERSHIP (
     FOREIGN KEY(VIEWER_ID) REFERENCES VIEWER,
     FOREIGN KEY(EPISODE_ID) REFERENCES EPISODE
 );
+-----------------------------------------------------------
