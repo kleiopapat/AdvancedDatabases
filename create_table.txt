@@ -8,7 +8,7 @@ CREATE TABLE ACTOR (
     COUNTRY					VARCHAR2(50) NOT NULL,
     DOB						DATE NOT NULL
 );
-
+-----------------------------------------------------------------------------
 CREATE TABLE EPISODE(
     EPISODE_ID 				NUMBER(3) PRIMARY KEY,
     TITLE					VARCHAR2(100) NOT NULL,
