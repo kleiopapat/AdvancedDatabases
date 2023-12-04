@@ -1,7 +1,7 @@
 --TABLES
 
 CREATE TABLE ACTOR (
-    ACTOR_ID 				NUMBER(3) PRIMARY KEY,
+    ACTOR_ID 				NUMBER(3),
     NAME 					VARCHAR2(50) NOT NULL,
     SURNAME					VARCHAR2(50) NOT NULL,
     GENDER					VARCHAR2(10),
@@ -10,18 +10,17 @@ CREATE TABLE ACTOR (
     COUNTRY					VARCHAR2(50) NOT NULL,
     DOB						DATE NOT NULL
 );
------------------------------------------------------------------------------
+
 CREATE TABLE EPISODE(
-    EPISODE_ID 				NUMBER(3) PRIMARY KEY,
+    EPISODE_ID 				NUMBER(3),
     TITLE					VARCHAR2(100) NOT NULL,
     SEASON					NUMBER(3) NOT NULL,
     LENGTH					NUMBER(5)
 );
 
---Actor and Series table will be connected via the Casting table. So the first 
--- two tables should only contain unique values. 
+
 CREATE TABLE SERIES(
-    SERIES_ID				NUMBER(3) PRIMARY KEY,
+    SERIES_ID				NUMBER(3),
     TITLE					VARCHAR2(100) NOT NULL,
     DESCRIPTION				VARCHAR2(500),
 --  ACTOR_ID				NUMBER(3),
