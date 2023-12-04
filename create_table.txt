@@ -15,7 +15,8 @@ CREATE TABLE EPISODE(
     EPISODE_ID 				NUMBER(3) PRIMARY KEY,
     TITLE					VARCHAR2(100) NOT NULL,
     SEASON					NUMBER(3) NOT NULL,
-    LENGTH					NUMBER(5)
+    LENGTH					NUMBER(5),
+    SERIES_ID               NUMBER(9) NOT NULL
 );
 
 --Actor and Series table will be connected via the Casting table. So the first 
