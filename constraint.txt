@@ -21,46 +21,46 @@ PRIMARY KEY(episode_id);
 --VIEWERS
 --Uppercases constraints in viewers data entries
 
-ALTER TABLE viewers
-ADD CONSTRAINT ck_viewers_name
+ALTER TABLE viewer
+ADD CONSTRAINT ck_viewer_name
 CHECK(name=UPPER(name));
 
-ALTER TABLE viewers
-ADD CONSTRAINT ck_viewers_surname
+ALTER TABLE viewer
+ADD CONSTRAINT ck_viewer_surname
 CHECK(surname=UPPER(surname));
 
-ALTER TABLE viewers
-ADD CONSTRAINT ck_viewers_email
+ALTER TABLE viewer
+ADD CONSTRAINT ck_viewer_email
 CHECK(email=UPPER(email));
 
-ALTER TABLE viewers
-ADD CONSTRAINT ck_viewers_city
+ALTER TABLE viewer
+ADD CONSTRAINT ck_viewer_city
 CHECK(city=UPPER(city));
 
-ALTER TABLE viewers
-ADD CONSTRAINT ck_viewers_country
+ALTER TABLE viewer
+ADD CONSTRAINT ck_viewer_country
 CHECK(country=UPPER(country));
 
-ALTER TABLE viewers
-ADD CONSTRAINT ck_viewers_address
+ALTER TABLE viewer
+ADD CONSTRAINT ck_viewer_address
 CHECK(address=UPPER(address));
 
---Gender constraint in viewers table
+--Gender constraint in viewer table
 
-ALTER TABLE viewers
-ADD CONSTRAINT ck_viewers_gender
+ALTER TABLE viewer
+ADD CONSTRAINT ck_viewer_gender
 CHECK(gender IN (‘F’,’M’,’O’));
 
---Unique email in viewers table
+--Unique email in viewer table
 
-ALTER TABLE viewers
-ADD CONSTRAINT unique_viewers_email
+ALTER TABLE viewer
+ADD CONSTRAINT unique_viewer_email
 UNIQUE(email);
 
---Primary key in viewers table
+--Primary key in viewer table
 
-ALTER TABLE viewers
-ADD CONSTRAINT pk_viewers
+ALTER TABLE viewer
+ADD CONSTRAINT pk_viewer
 PRIMARY KEY(viewer_id);
 
 --VIEWERSHIP
