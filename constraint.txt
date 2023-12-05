@@ -1,3 +1,68 @@
+----------------------------------------------------------
+--------------------- CONSTRAINTS -------------------------
+-----------------------------------------------------------
+
+-- Actor
+
+-- Primary key in ACTOR table
+ALTER TABLE ACTOR
+ADD CONSTRAINT pk_actor
+PRIMARY KEY(actor_id);
+
+ALTER TABLE ACTOR
+ADD CONSTRAINT ck_actor_name
+CHECK (NAME=UPPER(NAME)); 
+
+ALTER TABLE ACTOR
+ADD CONSTRAINT ck_actor_surname
+CHECK (SURNAME=UPPER(SURNAME)); 
+
+ALTER TABLE ACTOR
+ADD CONSTRAINT ck_actor_gender
+CHECK (GENDER IN ('F','M','O')); 
+
+ALTER TABLE ACTOR
+ADD CONSTRAINT unique_actor_email
+UNIQUE(EMAIL);
+
+ALTER TABLE ACTOR
+ADD CONSTRAINT ck_actor_country
+CHECK (COUNTRY=UPPER(COUNTRY));
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+-- Series
+ALTER TABLE SERIES
+ADD CONSTRAINT pk_series
+PRIMARY KEY(series_id);
+
+ALTER TABLE SERIES
+ADD CONSTRAINT ck_series_title
+CHECK (TITLE=UPPER(TITLE));
+
+ALTER TABLE SERIES
+ADD CONSTRAINT ck_series_description
+CHECK (DESCRIPTION=UPPER(DESCRIPTION));
+
+-- Casting
+ALTER TABLE CASTING
+ADD CONSTRAINT fk_casting_actor
+FOREIGN KEY(actor_id)
+REFERENCES actor(actor_id);
+
+ALTER TABLE CASTING
+ADD CONSTRAINT fk_casting_series
+FOREIGN KEY(series_id)
+REFERENCES series(series_id);
+
+ALTER TABLE CASTING
+ADD CONSTRAINT ck_casting_role
+CHECK (ROLE=UPPER(ROLE));
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
 --EPISODE
 --Uppercases in episode table 
 
@@ -18,8 +83,11 @@ ALTER TABLE episode
 ADD CONSTRAINT pk_episode
 PRIMARY KEY(episode_id);
 
---VIEWERS
---Uppercases constraints in viewers data entries
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+--VIEWER
+--Uppercases constraints in viewer data entries
 
 ALTER TABLE viewer
 ADD CONSTRAINT ck_viewer_name
@@ -49,7 +117,7 @@ CHECK(address=UPPER(address));
 
 ALTER TABLE viewer
 ADD CONSTRAINT ck_viewer_gender
-CHECK(gender IN (‘F’,’M’,’O’));
+CHECK(gender IN ('F','M','O'));
 
 --Unique email in viewer table
 
@@ -63,13 +131,16 @@ ALTER TABLE viewer
 ADD CONSTRAINT pk_viewer
 PRIMARY KEY(viewer_id);
 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
 --VIEWERSHIP
 --Add foreign keys to viewership
 
 ALTER TABLE viewership
 ADD CONSTRAINT fk_viewership_viewers
 FOREIGN KEY(viewer_id)
-REFERENCES viewers(viewer_id);
+REFERENCES viewer(viewer_id);
 
 ALTER TABLE viewership
 ADD CONSTRAINT fk_viewership_episode
@@ -82,7 +153,8 @@ ALTER TABLE viewership
 ADD CONSTRAINT pk_viewership
 PRIMARY KEY(viewer_id, episode_id);
   
-
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 
 
 
