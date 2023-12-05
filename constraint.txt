@@ -26,6 +26,10 @@ ADD CONSTRAINT unique_actor_email
 UNIQUE(EMAIL);
 
 ALTER TABLE ACTOR
+ADD CONSTRAINT ck_actor_email
+CHECK (EMAIL=UPPER(EMAIL));
+
+ALTER TABLE ACTOR
 ADD CONSTRAINT ck_actor_country
 CHECK (COUNTRY=UPPER(COUNTRY));
 
@@ -59,6 +63,14 @@ REFERENCES series(series_id);
 ALTER TABLE CASTING
 ADD CONSTRAINT ck_casting_role
 CHECK (ROLE=UPPER(ROLE));
+
+--Primary Key in CASTING table
+
+ALTER TABLE CASTING
+ADD CONSTRAINT pk_casting
+PRIMARY KEY(actor_id, series_id);
+
+
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
