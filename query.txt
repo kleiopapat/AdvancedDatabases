@@ -1,0 +1,88 @@
+--a)All the records from one table (table ACTOR)
+SELECT * 
+FROM ACTOR;
+
+--b)3 columns(City, Country and Gender) from Viewer Table in sorted in reverse alphabetical order of the city
+SELECT CITY, COUNTRY, GENDER
+FROM VIEWER
+ORDER BY CITY DESC;
+
+--c1) The name, surname and the city of the actors living in NEW YORK
+
+SELECT NAME, SURNAME, CITY 
+FROM ACTOR 
+WHERE CITY='NEW YORK'; 
+
+--c2) Viewers with their surname has an A and ending with an S 
+
+SELECT *
+FROM VIEWER
+WHERE SURNAME LIKE  '%A%S';
+
+--c3) The name, surname and country of actors they are not from USA and France.
+
+SELECT NAME, SURNAME, COUNTRY
+FROM ACTOR
+WHERE COUNTRY NOT IN ('US','FR'); 
+
+--c4) Viewership in the summer of 2023
+
+SELECT * 
+FROM VIEWERSHIP
+WHERE DOV BETWEEN '01-JUN-2023' AND '31-AUG-2023'; 
+
+--Alternative query: 
+
+--SELECT * 
+--FROM VIEWERSHIP
+--WHERE TO_CHAR(DOV,'YYYY')=2023 AND TO_CHAR(DOV,'MM') BETWEEN 6 AND 8; 
+
+--d1)The inner join of actors and their roles. In other words, the roles and the actors who played them (Since every role has an actor in the database - PK)
+
+SELECT A.NAME, A.SURNAME, C.ROLES ACTOR_ROLE
+FROM ACTOR A
+JOIN CASTING C
+ON A.ACTOR_ID=C.ACTOR_ID; 
+
+--d2)Shows the series titles and the actors who played in the series. Again inner join, actors who do not participate in a series are excluded. 
+
+SELECT S.TITLE, A.NAME, A.SURNAME 
+FROM ACTOR A 
+JOIN CASTING C ON A.ACTOR_ID=C.ACTOR_ID 
+JOIN SERIES S ON S.SERIES_ID=C.SERIES_ID; 
+
+--d3)Shows the series watched by viewers
+
+SELECT DISTINCT V.VIEWER_ID, V.SURNAME VIEWER_SURNAME, S.TITLE SERIES_TITLE  
+FROM VIEWER V 
+JOIN VIEWERSHIP VS ON VS.VIEWER_ID=V.VIEWER_ID 
+JOIN EPISODE E ON VS.EPISODE_ID=E.EPISODE_ID  
+JOIN SERIES S ON S.SERIES_ID=E.SERIES_ID; 
+
+--e1)Actors with surname starts with C and ends with E.
+
+SELECT *
+FROM ACTOR
+WHERE SURNAME LIKE 'C%E';
+
+--e2)Number of viewers per country
+
+SELECT COUNTRY, COUNT(COUNTRY) NUMBER_OF_VIEWERS
+FROM VIEWER
+GROUP BY COUNTRY;
+
+--e3)Most popular episode
+
+SELECT EPISODE_ID, COUNT(EPISODE_ID) EPISODE_VIEWS 
+FROM VIEWERSHIP 
+GROUP BY EPISODE_ID 
+ORDER BY EPISODE_VIEWS DESC; 
+
+--Alternative
+
+SELECT EPISODE_ID, COUNT(EPISODE_ID) EPISODE_VIEWS
+FROM VIEWERSHIP
+GROUP BY EPISODE_ID
+HAVING COUNT(EPISODE_ID)>=
+    (SELECT MAX(C_EPISODE) 
+    FROM (SELECT EPISODE_ID, COUNT(EPISODE_ID) C_EPISODE FROM VIEWERSHIP GROUP BY EPISODE_ID));
