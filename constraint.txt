@@ -62,7 +62,7 @@ REFERENCES series(series_id);
 
 ALTER TABLE CASTING
 ADD CONSTRAINT ck_casting_role
-CHECK (ROLE=UPPER(ROLE));
+CHECK (ROLES=UPPER(ROLES));
 
 --Primary Key in CASTING table
 
