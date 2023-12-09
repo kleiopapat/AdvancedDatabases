@@ -31,12 +31,6 @@ SELECT *
 FROM VIEWERSHIP
 WHERE DOV BETWEEN '01-JUN-2023' AND '31-AUG-2023'; 
 
---Alternative query: 
-
---SELECT * 
---FROM VIEWERSHIP
---WHERE TO_CHAR(DOV,'YYYY')=2023 AND TO_CHAR(DOV,'MM') BETWEEN 6 AND 8; 
-
 --d1)The inner join of actors and their roles. In other words, the roles and the actors who played them (Since every role has an actor in the database - PK)
 
 SELECT A.NAME, A.SURNAME, C.ROLES ACTOR_ROLE
@@ -188,12 +182,12 @@ ORDER BY "NUMBER_OF_EPISODES" DESC
 FETCH FIRST ROW WITH TIES;
 
 --e18) Show the most popular series (the series that its episodes were watched the most times) per gender.
-    WITH RankedSeriesViews AS (
+WITH RankedSeriesViews AS (
     SELECT
         S.TITLE,
         V.GENDER,
         COUNT(E.SERIES_ID) AS SERIES_VIEWS,
-        RANK() OVER (PARTITION BY V.GENDER ORDER BY COUNT(E.SERIES_ID) DESC) AS rnk
+        RANK() OVER (PARTITION BY V.GENDER ORDER BY COUNT(E.SERIES_ID) DESC) AS RNK
     FROM
         VIEWER V
         JOIN VIEWERSHIP VS ON V.VIEWER_ID = VS.VIEWER_ID
@@ -209,16 +203,7 @@ SELECT
 FROM
     RankedSeriesViews
 WHERE
-    rnk = 1;
--- Alternative
---SELECT S.TITLE, V.GENDER, COUNT(E.SERIES_ID) SERIES_VIEWS
---FROM VIEWER V 
---JOIN VIEWERSHIP VS ON V.VIEWER_ID=VS.VIEWER_ID
---JOIN EPISODE E ON E.EPISODE_ID=VS.EPISODE_ID
---JOIN SERIES S ON S.SERIES_ID=E.SERIES_ID    
---GROUP BY S.TITLE, V.GENDER 
---ORDER BY SERIES_VIEWS DESC
---FETCH FIRST ROW WITH TIES;
+    RNK = 1;
 
 --e19) Assume a username for the viewers is made up of the first 4 letters of the first name added to the first 4 letters of the surname. Write the query
 --to create and show the username for each viewer. Do not attempt to input it in the viewers table.
