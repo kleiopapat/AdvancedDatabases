@@ -1,0 +1,29 @@
+
+--Drop tables with the right order to avoid depedencies.
+
+DROP TABLE VIEWERSHIP;
+
+DROP TABLE VIEWER;
+
+DROP TABLE CASTING;
+
+DROP TABLE EPISODE;
+
+DROP TABLE SERIES;
+
+DROP TABLE ACTOR;
+
+--Drop sequences
+
+DROP SEQUENCE seq_actor_id;
+
+DROP SEQUENCE seq_episode_id;
+
+DROP SEQUENCE seq_series_id;
+
+DROP SEQUENCE seq_viewer_id;
+
+--Delete permanently the table and the sequences by emptying the recycle bin
+
+PURGE RECYCLEBIN;
+
